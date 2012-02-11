@@ -1,0 +1,29 @@
+{
+	"name": "igneous",
+	"version": "0.0.1",
+	"description": "Automatic asset bundling and CDN deployment",
+	"homepage": "http://kemp59f.info/igneous/",
+	"author": {
+		"name": "Timothy Kempf",
+		"email": "tim@kemp59f.info",
+		"url": "http://kemp59f.info"
+	},
+	"main": "lib/igneous.js",
+	"directories": {
+		"lib": "lib",
+		"example": "examples"
+	},
+	"dependencies": {
+		"aws-lib": ">=0.0.5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/Fauntleroy/igneous.git"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/andyet/Capsule/blob/master/license-mit"
+		}
+	]
+}
