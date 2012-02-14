@@ -1,6 +1,6 @@
 {
 	"name": "igneous",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Automatic asset bundling and CDN deployment",
 	"homepage": "http://kemp59f.info/igneous/",
 	"author": {
@@ -15,7 +15,8 @@
 	},
 	"dependencies": {
 		"knox": ">=0.0.9",
-		"uglify-js": ">=1.2.5"
+		"uglify-js": ">=1.2.5",
+		"clean-css": ">=0.3.2"
 	},
 	"devDependencies": {
 		"mocha": ">=0.12.0",
