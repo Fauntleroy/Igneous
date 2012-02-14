@@ -18,7 +18,7 @@ Usage
 To use Igneous, you first require the module and set your AWS configuration. After that you supply a list of file flows you want to concatenate and send off to S3, using the final filename of each flow as the key:
 
 ```javascript
-var igneous = require('../lib/igneous.js');
+var igneous = require('igneous');
 
 igneous.set( 'aws_key', 'TEST' );
 igneous.set( 'aws_secret', 'TEST' );
