@@ -17,6 +17,11 @@
 		"knox": ">=0.0.9",
 		"uglify-js": ">=1.2.5"
 	},
+	"devDependencies": {
+		"mocha": ">=0.12.0",
+		"should": ">=0.5.1",
+		"sinon": ">=1.3.1"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/Fauntleroy/igneous.git"
