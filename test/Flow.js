@@ -1,7 +1,7 @@
 var should = require('should');
 var sinon = require('sinon');
 var fs = require('fs');
-var igneous = require('../lib/igneous');
+var igneous = require('../lib/igneous.js');
 igneous.set( 'test', true );
 
 describe( 'igneous.Flow()', function(){

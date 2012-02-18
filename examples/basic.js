@@ -20,9 +20,21 @@ igneous.createFlows({
 	'scripts.js': {
 		type: 'js',
 		files: [
+			'scripts/handlebars.js',
 			'scripts/player.js',
 			'scripts/item.js'
 		],
+		compress: true
+	},
+	'templates.js': {
+		type: 'jst',
+		files: [
+			'templates/test1.jst',
+			'templates/test2.jst',
+			'templates/_partial.jst'
+		],
+		jst_lang: 'handlebars',
+		jst_namespace: 'templates',
 		compress: true
 	}
 });
@@ -32,6 +44,7 @@ server.get( '/', function( req, res ){
 		'<head>'+
 			'<link rel="stylesheet" href="'+ igneous['stylesheets.css'] +'" />'+
 			'<script src="'+ igneous['scripts.js'] +'"></script>'+
+			'<script src="'+ igneous['templates.js'] +'"></script>'+
 		'</head>'+
 	'</html>');
 });
