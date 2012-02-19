@@ -11,24 +11,21 @@ igneous.set( 's3_bucket', 'TEST' );
 igneous.createFlows({
 	'stylesheets.css': {
 		type: 'css',
-		files: [
-			'styles/layout.css',
-			'styles/red.css'
+		paths: [
+			'styles'
 		],
 		compress: true
 	},
 	'scripts.js': {
 		type: 'js',
-		files: [
-			'scripts/handlebars.js',
-			'scripts/player.js',
-			'scripts/item.js'
+		paths: [
+			'scripts'
 		],
 		compress: true
 	},
 	'templates.js': {
 		type: 'jst',
-		files: [
+		paths: [
 			'templates/test1.jst',
 			'templates/test2.jst',
 			'templates/_partial.jst'
