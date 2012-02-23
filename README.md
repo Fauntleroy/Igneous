@@ -27,7 +27,7 @@ igneous.set( 's3_bucket', 'TEST' );
 igneous.createFlows({
 	'stylesheets.css': {
 		type: 'css',
-		files: [
+		paths: [
 			'styles/layout.css',
 			'styles/red.css'
 		],
@@ -35,9 +35,8 @@ igneous.createFlows({
 	},
 	'scripts.js': {
 		type: 'js',
-		files: [
-			'scripts/player.js',
-			'scripts/item.js'
+		paths: [
+			'scripts'
 		],
 		compress: true
 	}

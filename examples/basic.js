@@ -1,5 +1,6 @@
 var express = require('express');
 var server = express.createServer();
+server.use( express.static('./assets') );
 server.listen( 8080 );
 
 var igneous = require('../lib/igneous.js');
