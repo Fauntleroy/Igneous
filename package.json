@@ -17,7 +17,7 @@
 		"knox": ">=0.0.9",
 		"uglify-js": ">=1.2.5",
 		"clean-css": ">=0.3.2",
-		"handlebars": ">=1.0.5"
+		"handlebars": ">=1.0.4"
 	},
 	"devDependencies": {
 		"mocha": ">=0.12.0",
