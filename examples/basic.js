@@ -5,44 +5,58 @@ server.listen( 8080 );
 
 var igneous = require('../lib/igneous.js');
 
-igneous.set( 'aws_key', 'TEST' );
-igneous.set( 'aws_secret', 'TEST' );
-igneous.set( 's3_bucket', 'TEST' );
+igneous.config({
+	host: {
+		provider: 'local',
+		path: __dirname +'/assets/flows/',
+		url: '/flows/'
+	},
+	compress: true
+	/*host: {
+		provider: 's3',
+		aws_key: '',
+		aws_secret: '',
+		bucket: ''
+	},*/
+});
 
-igneous.createFlows({
-	'stylesheets.css': {
+igneous.createFlows([
+	{
+		name: 'stylesheets.css',
 		type: 'css',
+		base_path: __dirname +'/assets/styles/',
 		paths: [
-			'styles'
-		],
-		compress: true
+			'/'
+		]
 	},
-	'scripts.js': {
+	{
+		name: 'scripts.js',
 		type: 'js',
+		base_path: __dirname +'/assets/scripts/',
 		paths: [
-			'scripts'
-		],
-		compress: true
+			'/'
+		]
 	},
-	'templates.js': {
+	{
+		name: 'templates.js',
 		type: 'jst',
+		base_path: __dirname +'/assets/templates/',
 		paths: [
-			'templates/test1.jst',
-			'templates/test2.jst',
-			'templates/_partial.jst'
+			'test1.jst',
+			'test2.jst',
+			'_partial.jst'
 		],
 		jst_lang: 'handlebars',
-		jst_namespace: 'templates',
-		compress: true
+		jst_namespace: 'templates'
 	}
-});
+]);
 
 server.get( '/', function( req, res ){
 	res.send('<html>'+
 		'<head>'+
-			'<link rel="stylesheet" href="'+ igneous['stylesheets.css'] +'" />'+
-			'<script src="'+ igneous['scripts.js'] +'"></script>'+
-			'<script src="'+ igneous['templates.js'] +'"></script>'+
+			igneous.tag('stylesheets.css') +
+			igneous.tag('scripts.js') +
+			igneous.tag('templates.js') +
 		'</head>'+
 	'</html>');
 });
