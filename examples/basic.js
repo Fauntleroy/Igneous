@@ -11,7 +11,8 @@ igneous.config({
 		path: __dirname +'/assets/flows/',
 		url: '/flows/'
 	},
-	compress: true
+	compress: false,
+	debug: true
 	/*host: {
 		provider: 's3',
 		aws_key: '',

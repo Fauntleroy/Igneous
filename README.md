@@ -15,20 +15,31 @@ npm install igneous
 Usage
 -------------------------
 
-To use Igneous, you first require the module and set your AWS configuration. After that you supply a list of file flows you want to concatenate and send off to S3, using the final filename of each flow as the key:
+To use Igneous, you first require the module and set your configuration. After that you supply a list of file flows you want to concatenate and send off to S3:
 
 ```javascript
 var igneous = require('../lib/igneous.js');
 
+// Store files locally
 igneous.config({
-	compress: true
+	host: {
+		provider: 'local',
+		path: __dirname +'/assets/flows/',
+		url: '/flows/'
+	},
+	compress: false
+});
+
+// Store files on S3
+/*igneous.config({
 	host: {
 		provider: 's3',
 		aws_key: '',
 		aws_secret: '',
 		bucket: ''
-	}
-});
+	},
+	compress: true
+});*/
 
 igneous.createFlows([
 	{
