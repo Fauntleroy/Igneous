@@ -14,6 +14,7 @@
 		"example": "examples"
 	},
 	"dependencies": {
+		"chokidar": ">=0.3.0",
 		"knox": ">=0.0.9",
 		"uglify-js": ">=1.2.6",
 		"clean-css": ">=0.3.2",

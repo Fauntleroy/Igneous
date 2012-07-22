@@ -35,7 +35,8 @@ igneous.createFlows([
 		type: 'js',
 		base_path: __dirname +'/assets/scripts/',
 		paths: [
-			'/'
+			'/',
+			'nested'
 		]
 	},
 	{
