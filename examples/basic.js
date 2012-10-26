@@ -1,64 +1,63 @@
 var express = require('express');
-var server = express.createServer();
-server.use( express.static('./assets') );
-server.listen( 8080 );
-
+var server = express();
 var igneous = require('../lib/igneous.js');
 
-igneous.config({
+server.use( igneous({
 	host: {
 		provider: 'local',
-		path: __dirname +'/assets/flows/',
-		url: '/flows/'
+		path: __dirname +'/assets/flows/'
 	},
-	compress: false,
-	debug: true
 	/*host: {
 		provider: 's3',
-		aws_key: '',
-		aws_secret: '',
-		bucket: ''
+		aws_key: process.env.AWS_KEY,
+		aws_secret: process.env.AWS_SECRET,
+		bucket: 'igneous-test'
 	},*/
-});
+	root: __dirname +'/assets',
+	compress: false,
+	debug: true,
+	flows: [
+		{
+			route: 'styles.css',
+			type: 'css',
+			base: '/styles/',
+			paths: [
+				'/'
+			]
+		},
+		{
+			route: 'scripts.js',
+			type: 'js',
+			base: '/scripts/',
+			paths: [
+				'/',
+				'nested'
+			]
+		},
+		{
+			route: 'templates.js',
+			type: 'jst',
+			base: '/templates/',
+			paths: [
+				'test1.jst',
+				'test2.jst',
+				'_partial.jst'
+			],
+			jst_lang: 'handlebars',
+			jst_namespace: 'templates'
+		}
+	]
+}));
+server.use( express.static('./assets') );
 
-igneous.createFlows([
-	{
-		name: 'stylesheets.css',
-		type: 'css',
-		base_path: __dirname +'/assets/styles/',
-		paths: [
-			'/'
-		]
-	},
-	{
-		name: 'scripts.js',
-		type: 'js',
-		base_path: __dirname +'/assets/scripts/',
-		paths: [
-			'/',
-			'nested'
-		]
-	},
-	{
-		name: 'templates.js',
-		type: 'jst',
-		base_path: __dirname +'/assets/templates/',
-		paths: [
-			'test1.jst',
-			'test2.jst',
-			'_partial.jst'
-		],
-		jst_lang: 'handlebars',
-		jst_namespace: 'templates'
-	}
-]);
+server.listen( 8080 );
 
 server.get( '/', function( req, res ){
 	res.send('<html>'+
 		'<head>'+
-			igneous.tag('stylesheets.css') +
-			igneous.tag('scripts.js') +
-			igneous.tag('templates.js') +
+			'<link href="/styles.css" rel="stylesheet" />'+
+			'<script src="/scripts.js"></script>'+
+			'<script src="/templates.js"></script>'+
 		'</head>'+
 	'</html>');
 });
