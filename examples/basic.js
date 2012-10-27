@@ -3,16 +3,6 @@ var server = express();
 var igneous = require('../lib/igneous.js');
 
 server.use( igneous({
-	host: {
-		provider: 'local',
-		path: __dirname +'/assets/flows/'
-	},
-	/*host: {
-		provider: 's3',
-		aws_key: process.env.AWS_KEY,
-		aws_secret: process.env.AWS_SECRET,
-		bucket: 'igneous-test'
-	},*/
 	root: __dirname +'/assets',
 	compress: false,
 	debug: true,
