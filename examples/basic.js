@@ -4,8 +4,7 @@ var igneous = require('../lib/igneous.js');
 
 server.use( igneous({
 	root: __dirname +'/assets',
-	compress: false,
-	debug: true,
+	minify: true,
 	flows: [
 		{
 			route: 'styles.css',

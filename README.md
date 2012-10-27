@@ -1,10 +1,12 @@
-Igneous
-================================
+# Igneous
 
-Easily concatenate and minify assets, then send them to Amazon S3. 
+Simple asset compilation middleware for Connect and Express.
 
-Installation
--------------------------
+Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre and post-processed in a variety of ways, including minification, coffeescript compilation, and template compilation. As time goes on, more processors will be added, along with the ability to specify custom processing functions.
+
+Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
+
+## Installation
 
 To install Igneous, just use npm:
 
@@ -12,56 +14,48 @@ To install Igneous, just use npm:
 npm install igneous
 ```
 
-Usage
--------------------------
+## Usage
 
-To use Igneous, you first require the module and set your configuration. After that you supply a list of file flows you want to concatenate and send off to S3:
+Igneous is Connect middleware, meaning it has to be used via [Connect](https://github.com/senchalabs/connect) or something that extends it, like [Express](http://expressjs.com/).
+
+Igneous uses a simple configuration method to define groups of assets—called "flows"—along with some pre/post-processing options:
 
 ```javascript
-var igneous = require('../lib/igneous.js');
+var igneous = require('igneous');
 
-// Store files locally
-igneous.config({
-	host: {
-		provider: 'local',
-		path: __dirname +'/assets/flows/',
-		url: '/flows/'
-	},
-	compress: false
-});
+var igneous_middleware = igneous({
+	root: __dirname +'/assets/',
+	minify: true,
+	flows: [
+		{
+			route: 'scripts/application.js',
+			type: 'js',
+			paths: [
+				'toolbar.js',
+				'home.js'
+			]
+		}
+	]
+})
+```
 
-// Store files on S3
-/*igneous.config({
-	host: {
-		provider: 's3',
-		aws_key: '',
-		aws_secret: '',
-		bucket: ''
-	},
-	compress: true
-});*/
+After the middleware is configured, it just needs to be used:
 
-igneous.createFlows([
-	{
-		name: 'stylesheets.css',
-		type: 'css',
-		base_path: __dirname +'/assets/styles/',
-		paths: [
-			'/'
-		]
-	},
-	{
-		name: 'scripts.js',
-		type: 'js',
-		base_path: __dirname +'/assets/scripts/',
-		paths: [
-			'/'
-		]
-	},
-	{
-		name: 'templates.js',
+```javascript
+var express = require('express');
+express.use( igneous_middleware );
+```
+
+Client-side javascript templates can also be compiled by Igneous. Right now it's limited to just Handlebars and jQuery templates, but as time goes on more template packages will be added. An example of a Handlebars configuration:
+
+```javascript
+igneous({
+	root: __dirname +'/assets',
+	minify: true,
+	flows: [
+		route: 'templates.js',
 		type: 'jst',
-		base_path: __dirname +'/assets/templates/',
+		base: '/templates/',
 		paths: [
 			'test1.jst',
 			'test2.jst',
@@ -69,24 +63,62 @@ igneous.createFlows([
 		],
 		jst_lang: 'handlebars',
 		jst_namespace: 'templates'
-	}
-]);
+	]
+})
 ```
 
-When igneous.createFlows runs, it concatenates the files in each flow and sends them off to S3, returning their new URL with a timestamp parameter. You can generate the appropriate HTML tags like so:
+These templates will be made available on the `jst_namespace`, with each template being associated with the string used for its path. For example, to access the template 'test1.jst' from above:
 
 ```javascript
-// one method
-igneous.flows['stylesheets.css'].tag();
-
-// another sweet method
-igneous.tag('stylesheets.css');
+templates['test1']({ test: 'My radical template data' });
 ```
 
-The URL can also be directly accessed:
+## Parameters
 
-```javascript
-igneous.flows['stylesheets.css'].url;
-```
+Igneous can be configured to run in a variety of ways. Some options, such as `root`, are set globally, while other options, such as `route` are set per flow. Other options, like `minify`, may be set globally and overriden on a per-flow basis.
 
-From there it's a simple task to pass these tags/URLs into markup or a template object.
+### Global Parameters
+
+**root** - *(string)* - The root directory to check for assets.
+**minify** *(boolean)* - Minify the assets after compilation. Defaults to `false`.
+**watch** *(boolean)* - Watch the flow paths for changes. Defaults to `true`.
+**encoding** *(string)* - The file encoding to be used for each flow. Defaults to `UTF-8`
+**flows** *(array)* - An array of flow configuration objects.
+
+### Flow Parameters
+
+**route** *(regex/string)* - The route to use for this generated file.
+**type** *(string - "js", "css", "jst")* - The type of files included in this flow.
+**minify** *(boolean)* - Minify the assets after compilation. Overrides the global `minify` parameter.
+**watch** *(boolean)* - Watch the flow paths for changes. Overrides the global `watch` parameter.
+**encoding** *(string)* - The file encoding to be used for this flow. Overrides the global `encoding` parameter.
+**jst_lang** *(string - "handlebars", "jquery-tmpl")* - The language to use if this is a javascript template flow.
+**jst_namespace** *(string)* - The variable name to make the compiled templates available on. Defaults to `JST`
+**paths** *(array)* - An array of strings representing the paths to include in this flow. These paths can be files or folders. If a folder is specified, Igneous will walk through the folder and include every file found within, including subfolders.
+
+## Future Plans
+
+In no specific order:
+
+- Coffeescript compilation
+- SASS compilation
+- LESS compilation
+- Automatic Amazon S3 deployment
+- Custom pre/post-processors
+- Custom store strategies
+- **TESTS TESTS TESTS**
+- Additional JST options
+
+## License
+
+MIT License.
+
+----------
+
+Copyright (c) 2012 Timothy Kempf
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
