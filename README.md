@@ -92,7 +92,7 @@ Igneous can be configured to run in a variety of ways. Some options, such as `ro
 - **minify** *(boolean)* - Minify the assets after compilation. Overrides the global `minify` parameter.
 - **watch** *(boolean)* - Watch the flow paths for changes. Overrides the global `watch` parameter.
 - **encoding** *(string)* - The file encoding to be used for this flow. Overrides the global `encoding` parameter.
-- **jst_lang** *(string - "handlebars", "jquery-tmpl")* - The language to use if this is a javascript template flow.
+- **jst_lang** *(string - "mustache", "handlebars", "jquery-tmpl")* - The language to use if this is a javascript template flow.
 - **jst_namespace** *(string)* - The variable name to make the compiled templates available on. Defaults to `JST`
 - **paths** *(array)* - An array of strings representing the paths to include in this flow. These paths can be files or folders. If a folder is specified, Igneous will walk through the folder and include every file found within, including subfolders.
 
