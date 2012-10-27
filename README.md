@@ -1,4 +1,4 @@
-# Igneous
+![Igneous](https://s3.amazonaws.com/igneous-site/igneous.png "Igneous")
 
 Simple asset compilation middleware for Connect and Express.
 
