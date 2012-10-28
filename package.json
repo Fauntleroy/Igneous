@@ -1,6 +1,6 @@
 {
 	"name": "igneous",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Automatic asset bundling and deployment",
 	"homepage": "http://kemp59f.info/igneous/",
 	"author": {
