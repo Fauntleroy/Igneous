@@ -101,7 +101,6 @@ Igneous can be configured to run in a variety of ways. Some options, such as `ro
 
 In no specific order:
 
-- Coffeescript compilation
 - SASS compilation
 - LESS compilation
 - Automatic Amazon S3 deployment
