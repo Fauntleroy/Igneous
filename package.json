@@ -27,6 +27,9 @@
 		"should": "1.2.x",
 		"sinon": "1.5.x"
 	},
+	"scripts": {
+		"test": "mocha -R spec --recursive"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/Fauntleroy/igneous.git"
