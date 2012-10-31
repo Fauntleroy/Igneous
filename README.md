@@ -1,10 +1,8 @@
-![Igneous](https://s3.amazonaws.com/igneous-site/igneous.png "Igneous")
+![Igneous](https://s3.amazonaws.com/igneous-site/igneous.png "Igneous") 0.1.3
 
 Simple asset compilation middleware for Connect and Express.
 
-Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre and post-processed in a variety of ways, including minification, coffeescript compilation, and template compilation. As time goes on, more processors will be added, along with the ability to specify custom processing functions.
-
-Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
+Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre and post-processed in a variety of ways, including minification, coffeescript compilation, and client-side javascript template compilation. Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
 
 ## Installation
 
@@ -16,7 +14,7 @@ npm install igneous
 
 ## Usage
 
-Igneous is Connect middleware, meaning it has to be used via [Connect](https://github.com/senchalabs/connect) or something that extends it, like [Express](http://expressjs.com/).
+Igneous is Connect middleware, meaning it must be used via [Connect](https://github.com/senchalabs/connect) or something that extends it, like [Express](http://expressjs.com/).
 
 Igneous uses a simple configuration method to define groups of assets—called "flows"—along with some pre/post-processing options:
 
@@ -46,7 +44,7 @@ var express = require('express');
 express.use( igneous_middleware );
 ```
 
-Client-side javascript templates can also be compiled by Igneous. Right now it's limited to just Handlebars and jQuery templates, but as time goes on more template packages will be added. An example of a Handlebars configuration:
+Client-side javascript templates can also be compiled by Igneous. Right now it's limited to just Mustache, Handlebars and jQuery templates, but as time goes on more template packages will be added. An example of a Handlebars configuration:
 
 ```javascript
 igneous({
@@ -73,9 +71,11 @@ These templates will be made available on the `jst_namespace`, with each templat
 templates['test1']({ test: 'My radical template data' });
 ```
 
+For more usage details, take a look at the [examples](https://github.com/Fauntleroy/Igneous/tree/master/examples) directory!
+
 ## Parameters
 
-Igneous can be configured to run in a variety of ways. Some options, such as `root`, are set globally, while other options, such as `route` are set per flow. Other options, like `minify`, may be set globally and overriden on a per-flow basis.
+Igneous can be configured to run in a variety of ways. Some options, such as `root`, are set globally, while other options, such as `route` are set per flow. Other options, like `minify`, may be set globally and overriden on a *per-flow* basis.
 
 ### Global Parameters
 
@@ -97,6 +97,10 @@ Igneous can be configured to run in a variety of ways. Some options, such as `ro
 - **jst_namespace** *(string)* - The variable name to make the compiled templates available on. Defaults to `JST`
 - **paths** *(array)* - An array of strings representing the paths to include in this flow. These paths can be files or folders. If a folder is specified, Igneous will walk through the folder and include every file found within, including subfolders.
 
+## Tests
+
+You can run Igenous' tests with the command `npm test`. These tests require [Mocha](https://github.com/visionmedia/mocha) to run.
+
 ## Future Plans
 
 In no specific order:
@@ -106,7 +110,7 @@ In no specific order:
 - Automatic Amazon S3 deployment
 - Custom pre/post-processors
 - Custom store strategies
-- **TESTS TESTS TESTS**
+- Additional test coverage
 - Additional JST options
 
 ## License
