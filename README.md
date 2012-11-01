@@ -1,8 +1,8 @@
-![Igneous](https://s3.amazonaws.com/igneous-site/igneous.png "Igneous") 0.1.3
+![Igneous](https://s3.amazonaws.com/igneous-site/igneous.png "Igneous") 0.1.4
 
 Simple asset compilation middleware for Connect and Express.
 
-Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre and post-processed in a variety of ways, including minification, coffeescript compilation, and client-side javascript template compilation. Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
+Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre and post-processed in a variety of ways, including minification, coffeescript, SASS/LESS, and client-side javascript template compilation. Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
 
 ## Installation
 
@@ -88,7 +88,7 @@ Igneous can be configured to run in a variety of ways. Some options, such as `ro
 ### Flow Parameters
 
 - **route** *(regex/string)* - The route to use for this generated file.
-- **type** *(string - "js", "css", "jst")* - The type of files included in this flow.
+- **type** *(string - "js", "css", "jst", "coffee", "less", "sass")* - The type of files included in this flow.
 - **extensions** *(array - ['js','coffee'])* - An array of strings that represent file extensions to look for. Defaults to the type.
 - **minify** *(boolean)* - Minify the assets after compilation. Overrides the global `minify` parameter.
 - **watch** *(boolean)* - Watch the flow paths for changes. Overrides the global `watch` parameter.
@@ -105,7 +105,6 @@ You can run Igenous' tests with the command `npm test`. These tests require [Moc
 
 In no specific order:
 
-- SASS compilation
 - Automatic Amazon S3 deployment
 - Custom pre/post-processors
 - Custom store strategies
