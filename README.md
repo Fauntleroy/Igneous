@@ -106,7 +106,6 @@ You can run Igenous' tests with the command `npm test`. These tests require [Moc
 In no specific order:
 
 - SASS compilation
-- LESS compilation
 - Automatic Amazon S3 deployment
 - Custom pre/post-processors
 - Custom store strategies
