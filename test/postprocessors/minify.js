@@ -3,20 +3,21 @@ var minify = require('../../lib/postprocessors/minify.js');
 
 describe( 'postprocessor - minify', function(){
 
-	it( 'minifies javascript', function(){
+	it( 'minifies javascript', function( cb ){
 
 		var contents = 'var test = true;'+
 			'if( test ) console.log( true );';
 		var config = {
 			mime_type: 'text/javascript'
 		};
-		var minified = minify( contents, config );
-
-		minified.length.should.be.below( contents.length );
+		minify( contents, config, function( minified ){
+			minified.length.should.be.below( contents.length );
+			cb();
+		});
 
 	});
 
-	it( 'minifies css', function(){
+	it( 'minifies css', function( cb ){
 
 		var contents = '#test {'+
 			'border-color: #ff0000;'+
@@ -26,9 +27,10 @@ describe( 'postprocessor - minify', function(){
 		var config = {
 			mime_type: 'text/css'
 		};
-		var minified = minify( contents, config );
-
-		minified.length.should.be.below( contents.length );
+		minify( contents, config, function( minified ){
+			minified.length.should.be.below( contents.length );
+			cb();
+		});
 
 	});
 
