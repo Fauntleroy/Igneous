@@ -4,7 +4,7 @@ var mustache = require('../../lib/preprocessors/mustache.js');
 
 describe( 'preprocessor - mustache', function(){
 
-	it( 'converts a mustache string into javascript', function(){
+	it( 'converts a mustache string into javascript', function( cb ){
 		
 		var file = {
 			path: 'test.jst',
@@ -13,11 +13,15 @@ describe( 'preprocessor - mustache', function(){
 		var config = {
 			jst_namespace: 'JST'
 		};
-		var compiled = mustache( file, config );
-		var context = {};
-		vm.runInNewContext( compiled, context );
+		mustache( file, config, function( processed ){
 
-		context.should.have.property('JST').with.have.property('test');
+			var context = {};
+			vm.runInNewContext( processed, context );
+
+			context.should.have.property('JST').with.have.property('test');
+			cb();
+
+		});
 
 	});
 

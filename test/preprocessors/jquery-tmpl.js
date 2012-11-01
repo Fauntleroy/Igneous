@@ -4,7 +4,7 @@ var jquery_tmpl = require('../../lib/preprocessors/jquery-tmpl.js');
 
 describe( 'preprocessor - jquery-tmpl', function(){
 
-	it( 'converts a jquery template string into javascript', function(){
+	it( 'converts a jquery template string into javascript', function( cb ){
 		
 		var file = {
 			path: 'test.jst',
@@ -13,11 +13,15 @@ describe( 'preprocessor - jquery-tmpl', function(){
 		var config = {
 			jst_namespace: 'JST'
 		};
-		var compiled = jquery_tmpl( file, config );
-		var context = {};
-		vm.runInNewContext( compiled, context );
+		jquery_tmpl( file, config, function( processed ){
 
-		context.should.have.property('JST').with.have.property('test');
+			var context = {};
+			vm.runInNewContext( processed, context );
+
+			context.should.have.property('JST').with.have.property('test');
+			cb();
+
+		});
 
 	});
 

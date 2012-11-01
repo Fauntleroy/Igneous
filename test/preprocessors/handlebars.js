@@ -4,7 +4,7 @@ var handlebars = require('../../lib/preprocessors/handlebars.js');
 
 describe( 'preprocessor - handlebars', function(){
 
-	it( 'converts a handlebars string into javascript', function(){
+	it( 'converts a handlebars string into javascript', function( cb ){
 		
 		var file = {
 			path: 'test.jst',
@@ -13,11 +13,15 @@ describe( 'preprocessor - handlebars', function(){
 		var config = {
 			jst_namespace: 'JST'
 		};
-		var compiled = handlebars( file, config );
-		var context = {};
-		vm.runInNewContext( compiled, context );
+		handlebars( file, config, function( processed ){
 
-		context.should.have.property('JST').with.have.property('test');
+			var context = {};
+			vm.runInNewContext( processed, context );
+
+			context.should.have.property('JST').with.have.property('test');
+			cb();
+
+		});
 
 	});
 

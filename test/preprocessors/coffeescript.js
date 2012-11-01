@@ -4,17 +4,22 @@ var coffeescript = require('../../lib/preprocessors/coffeescript.js');
 
 describe( 'preprocessor - coffeescript', function(){
 
-	it( 'converts a coffeescript string into javascript', function(){
+	it( 'converts a coffeescript string into javascript', function( cb ){
 
 		var file = {
 			contents: 'this.test = (x) -> x * 2'
 		};
 		var config = {};
-		var compiled = coffeescript( file, config );
-		var context = {};
-		vm.runInNewContext( compiled, context );
+		
+		coffeescript( file, config, function( processed ){
 
-		context.should.have.property('test').with.be.a('function');
+			var context = {};
+			vm.runInNewContext( processed, context );
+
+			context.should.have.property('test').with.be.a('function');
+			cb();
+
+		});
 
 	});
 
