@@ -92,13 +92,37 @@ describe('Flow', function(){
 
 	describe( '.preprocess', function(){
 
-		it( 'runs files through each specified preprocessor', function(){
+		it( 'runs files through each specified preprocessor', function( cb ){
 
-			var preprocessor = sinon.spy();
+			var preprocessor = sinon.spy( function( file, config, callback ){
+				callback('');
+			} );
 			flow.config.preprocessors = [preprocessor];
-			flow.preprocess();
+			flow.preprocess( function(){
 
-			preprocessor.called.should.be.true;
+				preprocessor.called.should.be.true;
+				cb();
+
+			});
+
+		});
+
+		it( 'preprocesses serially', function( cb ){
+
+			var preprocessor = function( file, config, callback ){
+				callback('');
+			};
+			var preprocessor1 = sinon.spy( preprocessor );
+			var preprocessor2 = sinon.spy( preprocessor );
+			var preprocessor3 = sinon.spy( preprocessor );
+			flow.config.preprocessors = [ preprocessor1, preprocessor2, preprocessor3 ];
+			flow.preprocess( function(){
+
+				preprocessor1.calledBefore(preprocessor2).should.be.true;
+				preprocessor2.calledBefore(preprocessor3).should.be.true;
+				cb();
+
+			});
 
 		});
 
@@ -127,13 +151,37 @@ describe('Flow', function(){
 
 	describe( '.postprocess', function(){
 
-		it( 'runs files through each specified postprocessor', function(){
+		it( 'runs files through each specified postprocessor', function( cb ){
 
-			var postprocessor = sinon.spy();
+			var postprocessor = sinon.spy( function( file, config, callback ){
+				callback('');
+			} );
 			flow.config.postprocessors = [postprocessor];
-			flow.postprocess();
+			flow.postprocess( function(){
 
-			postprocessor.called.should.be.true;
+				postprocessor.called.should.be.true;
+				cb();
+
+			});
+
+		});
+
+		it( 'postprocesses serially', function( cb ){
+
+			var postprocessor = function( file, config, callback ){
+				callback('');
+			};
+			var postprocessor1 = sinon.spy( postprocessor );
+			var postprocessor2 = sinon.spy( postprocessor );
+			var postprocessor3 = sinon.spy( postprocessor );
+			flow.config.postprocessors = [ postprocessor1, postprocessor2, postprocessor3 ];
+			flow.postprocess( function(){
+
+				postprocessor1.calledBefore(postprocessor2).should.be.true;
+				postprocessor2.calledBefore(postprocessor3).should.be.true;
+				cb();
+
+			});
 
 		});
 
