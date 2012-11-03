@@ -88,7 +88,7 @@ Igneous can be configured to run in a variety of ways. Some options, such as `ro
 ### Flow Parameters
 
 - **route** *(regex/string)* - The route to use for this generated file.
-- **type** *(string - "js", "css", "jst", "coffee", "less", "sass")* - The type of files included in this flow.
+- **type** *(string - "js", "css", "jst", "coffee", "less", "sass")* - The type of files included in this flow. If the type is set to "coffee" only files with the ".coffee" extension will be processed. Any other files included will be merged after the preprocessing step.
 - **extensions** *(array - ['js','coffee'])* - An array of strings that represent file extensions to look for. Defaults to the type.
 - **minify** *(boolean)* - Minify the assets after compilation. Overrides the global `minify` parameter.
 - **watch** *(boolean)* - Watch the flow paths for changes. Overrides the global `watch` parameter.

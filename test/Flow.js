@@ -23,7 +23,7 @@ describe('Flow', function(){
 
 	it( 'sets appropriate MIME types based on type', function(){
 
-		flow.mime_type.should.equal('text/javascript');
+		flow.mime_type.should.equal('application/javascript');
 
 	});
 

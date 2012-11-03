@@ -7,7 +7,8 @@ describe( 'preprocessor - coffeescript', function(){
 	it( 'converts a coffeescript string into javascript', function( cb ){
 
 		var file = {
-			contents: 'this.test = (x) -> x * 2'
+			contents: 'this.test = (x) -> x * 2',
+			type: 'application/coffeescript'
 		};
 		var config = {};
 		
