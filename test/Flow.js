@@ -77,6 +77,17 @@ describe('Flow', function(){
 
 		});
 
+		it( 'reads deeply nested files', function(){
+
+			flow.config.paths = ['deep'];
+			flow.add();
+			var files_length = 0;
+			for( var key in flow.files ) files_length++;
+
+			files_length.should.equal(2);
+
+		});
+
 		it( 'excludes files based on extension', function(){
 
 			flow.config.paths = ['test'];
