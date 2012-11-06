@@ -2,7 +2,9 @@
 
 Simple asset compilation middleware for Connect and Express.
 
-Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre and post-processed in a variety of ways, including minification, coffeescript, SASS/LESS, and client-side javascript template compilation. Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
+Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre/post-processed in a variety of ways, including minification, coffeescript, SASS/LESS, and client-side javascript template compilation. Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
+
+**Note: This module are still in flux.** If you plan on using this right now it might be wise to include the exact version number, as some parts of the API might change.
 
 ## Installation
 
@@ -30,7 +32,8 @@ var igneous_middleware = igneous({
 			type: 'js',
 			paths: [
 				'toolbar.js',
-				'home.js'
+				'home.js',
+				'app.coffee'
 			]
 		}
 	]
@@ -88,8 +91,8 @@ Igneous can be configured to run in a variety of ways. Some options, such as `ro
 ### Flow Parameters
 
 - **route** *(regex/string)* - The route to use for this generated file.
-- **type** *(string - "js", "css", "jst", "coffee", "less", "sass")* - The type of files included in this flow. If the type is set to "coffee" only files with the ".coffee" extension will be processed. Any other files included will be merged after the preprocessing step.
-- **extensions** *(array - ['js','coffee'])* - An array of strings that represent file extensions to look for. Defaults to the type.
+- **type** *(string - "js", "css", "jst")* - The type of files included in this flow.
+- **extensions** *(array - ['js','coffee','cs'])* - An array of strings that represent file extensions to look for. Extensions appropriate for the type are automatically added ( ex: `['css', 'less', 'sass', 'scss']` for a type of `css` )
 - **minify** *(boolean)* - Minify the assets after compilation. Overrides the global `minify` parameter.
 - **watch** *(boolean)* - Watch the flow paths for changes. Overrides the global `watch` parameter.
 - **encoding** *(string)* - The file encoding to be used for this flow. Overrides the global `encoding` parameter.
