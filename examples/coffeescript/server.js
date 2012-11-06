@@ -8,7 +8,7 @@ server.use( igneous({
 	flows: [
 		{
 			route: 'scripts.js',
-			type: 'coffee',
+			type: 'js',
 			base: '/scripts',
 			paths: [
 				'/'
