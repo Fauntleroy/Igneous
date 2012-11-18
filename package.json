@@ -1,6 +1,6 @@
 {
 	"name": "igneous",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "Automatic asset bundling and deployment",
 	"homepage": "https://github.com/Fauntleroy/Igneous",
 	"author": {
