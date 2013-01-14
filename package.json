@@ -23,7 +23,8 @@
 		"handlebars": "1.0.x",
 		"coffee-script": "1.4.x",
 		"less": "1.3.x",
-		"stylus": "0.30.x"
+		"stylus": "0.30.x",
+		"socket.io": "0.9.x"
 	},
 	"devDependencies": {
 		"node-sass": "0.2.x",
