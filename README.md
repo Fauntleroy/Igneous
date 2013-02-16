@@ -4,7 +4,7 @@ Simple asset compilation middleware for Connect and Express.
 
 Igneous helps keep asset management easy by merging groups of assets down to single files. These files can be pre/post-processed in a variety of ways, including minification, coffeescript, SASS/LESS, and client-side javascript template compilation. Igneous can also watch files and directories (including subdirectories) for changes and automatically regenerate bundles on the fly.
 
-**Note: This module are still in flux.** If you plan on using this right now it might be wise to include the exact version number, as some parts of the API might change.
+**Note: This module is still in flux.** If you plan on using this right now it might be wise to include the exact version number, as some parts of the API might change.
 
 ## Installation
 
