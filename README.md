@@ -1,3 +1,7 @@
+## This project is no longer being actively maintained
+
+Igneous was written back before [Grunt](http://gruntjs.com/) came around. Now that Grunt is capable of handling all the asset tasks Igneous can (and much more) I feel it's no longer necessary to continue this project.
+
 ![Igneous](https://s3.amazonaws.com/igneous-site/igneous.png "Igneous") 0.1.6
 
 Simple asset compilation middleware for Connect and Express.
