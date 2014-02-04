@@ -18,7 +18,7 @@
 		"async": "0.1.x",
 		"chokidar": "0.4.x",
 		"knox": "0.3.x",
-		"uglify-js2": "2.1.x",
+		"uglify-js": "2.1.x",
 		"clean-css": "0.8.x",
 		"handlebars": "1.0.x",
 		"coffee-script": "1.4.x",
